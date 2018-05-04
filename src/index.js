@@ -4,13 +4,30 @@ const { GraphQLServer } = require('graphql-yoga');
 const typeDefs = `
 type Query {
   info: String!
+  feed: [Link!]!
+}
+
+type Link {
+  id: ID!
+  description: String
+  url: String!
 }
 `
 
-/* Actual implementation of the GraphQL schema */
+/*
+* Actual implementation of the GraphQL schema.
+* NOTE: a resolver always has to be named after the
+* corresponding field from the schema definition!
+*/
 const resolvers = {
   Query: {
-    info: () => `This is the API of a Hackernews clone!`
+    info: () => `This is the API of a Hackernews clone!`,
+    feed: () => links,
+  },
+  Link: {
+    id: root => root.id,
+    description: root => root.description,
+    url: root => root.url,
   }
 }
 
@@ -23,6 +40,6 @@ const server = new GraphQLServer({
   resolvers,
 });
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 4000;
 
 server.start(() => console.log(`Server is running on port ${port}`));
