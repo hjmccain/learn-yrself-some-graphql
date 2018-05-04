@@ -1,18 +1,11 @@
 const { GraphQLServer } = require('graphql-yoga');
+// const typeDefs = require();
 
-/* Define GraphQL schema */
-const typeDefs = `
-type Query {
-  info: String!
-  feed: [Link!]!
-}
-
-type Link {
-  id: ID!
-  description: String
-  url: String!
-}
-`
+let links = [{
+  id: 'link-0',
+  url: 'www.howtographql.com',
+  description: 'Fullstack tutorial for GraphQL'
+}]
 
 /*
 * Actual implementation of the GraphQL schema.
@@ -25,6 +18,10 @@ const resolvers = {
     feed: () => links,
   },
   Link: {
+    /*
+    * This implementation is actually not necessary,
+    * since gQL is apparently wicked smart...
+    */
     id: root => root.id,
     description: root => root.description,
     url: root => root.url,
@@ -36,7 +33,7 @@ const resolvers = {
 * operations are accepted and how they should be resolved!
 */
 const server = new GraphQLServer({
-  typeDefs,
+  typeDefs: './src/schema.graphql',
   resolvers,
 });
 
