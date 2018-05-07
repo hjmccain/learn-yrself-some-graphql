@@ -1,11 +1,4 @@
 const { GraphQLServer } = require('graphql-yoga');
-// const typeDefs = require();
-
-let links = [{
-  id: 'link-0',
-  url: 'www.howtographql.com',
-  description: 'Fullstack tutorial for GraphQL'
-}]
 
 /*
 * Actual implementation of the GraphQL schema.
@@ -16,6 +9,17 @@ const resolvers = {
   Query: {
     info: () => `This is the API of a Hackernews clone!`,
     feed: () => links,
+  },
+  Mutation: {
+    post: (root, args) => {
+      const link = {
+        id: `link-${idCount++}`,
+        description: args.description,
+        url: args.url,
+      };
+      links.push(link);
+      return link;
+    }
   },
   Link: {
     /*

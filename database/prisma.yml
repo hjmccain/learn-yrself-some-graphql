@@ -1,0 +1,17 @@
+# Service name — will be part of the Prisma API endpoint
+service: hackernews-node
+
+# Deployment stage — also part of API endpoint
+stage: dev
+
+# Point to the file that holds data model
+datamodel: datamodel.graphql
+
+# The API can only be accessed when providing JWTs signed w/ this secret
+secret: mysecret123
+
+# Auto-generated so that Prisma knows where to deploy
+cluster: public-marblepuma-577/prisma-us1
+
+#   HTTP:  https://us1.prisma.sh/public-marblepuma-577/hackernews-node/dev
+#   WS:    wss://us1.prisma.sh/public-marblepuma-577/hackernews-node/dev
