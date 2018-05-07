@@ -4,11 +4,6 @@ const Query = require('./resolvers/Query');
 const Mutation = require('./resolvers/Mutation');
 const AuthPayload = require('./resolvers/AuthPayload');
 
-/*
-* Actual implementation of the GraphQL schema.
-* NOTE: a resolver always has to be named after the
-* corresponding field from the schema definition!
-*/
 const resolvers = {
   Query,
   Mutation,
